@@ -274,7 +274,7 @@
         function generateMod7Segment(forceFirstZero = false) {
             while (true) {
                 let digits = [];
-                digits = forceFirstZero ? [0] : [randRange(0, 9)];
+                digits[0] = forceFirstZero ? 0 : randRange(0, 9);
                 for (let i = 1; i < 6; i++) {
                     digits[i] = randRange(0, 9);
                 }
@@ -450,5 +450,6 @@ link.href = URL.createObjectURL(blob);
 link.download = microsoft_mod7_${type}_keys.txt;
 link.click();
 URL.revokeObjectURL(link.href);
-statusDisplay.innerHTML = <span class="valid">BATCH:</span> Exported ${count} keys to log file file output.;
+statusDisplay.innerHTML = <span class="valid">BATCH:</span> Exported ${count} keys to log file output.;
 });
+
