@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOD7 Key Generator</title>
+    <title>MOD7 Key Generator v2.0</title>
     <style>
+        /* Windows 98 Theme */
         * {
             margin: 0;
             padding: 0;
@@ -12,513 +13,581 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: 'MS Sans Serif', Tahoma, Arial, sans-serif;
+            background: #008080;
             min-height: 100vh;
-            color: #e0e0e0;
-            padding: 20px;
+            padding: 10px;
+            font-size: 11px;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
+        .window {
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #404040 #404040 #ffffff;
+            margin-bottom: 15px;
+            padding: 3px;
         }
 
-        header {
+        .title-bar {
+            background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+            color: white;
+            padding: 3px 5px;
+            font-weight: bold;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title-buttons span {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background: #c0c0c0;
+            border: 1px solid;
+            border-color: #ffffff #404040 #404040 #ffffff;
+            margin-left: 2px;
+            font-size: 10px;
+            line-height: 10px;
             text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
+            cursor: pointer;
+        }
+
+        .content {
+            padding: 10px;
         }
 
         h1 {
-            color: #6d4aff;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            color: #888;
-            font-size: 1.1em;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(109, 76, 255, 0.3);
+            color: #000080;
+            font-size: 16px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #808080;
         }
 
         h2 {
-            color: #6d4aff;
-            margin-bottom: 15px;
-            font-size: 1.4em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 10px 0 8px 0;
+            color: #000;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .section {
+            border: 2px inset;
+            border-color: #404040 #ffffff #ffffff #404040;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #c0c0c0;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #000;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
-            color: #ccc;
-            font-weight: 500;
+            margin-bottom: 4px;
+            font-size: 11px;
         }
 
-        select, input[type="number"], input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #444;
-            border-radius: 8px;
-            background: #1a1a2e;
-            color: #fff;
-            font-size: 1em;
-        }
-
-        select:focus, input:focus {
+        select, input, textarea {
+            font-family: 'MS Sans Serif', Tahoma, sans-serif;
+            font-size: 11px;
+            border: 2px solid;
+            border-color: #404040 #ffffff #ffffff #404040;
+            background: white;
+            padding: 4px 6px;
             outline: none;
-            border-color: #6d4aff;
-            box-shadow: 0 0 0 3px rgba(109, 76, 255, 0.2);
+            width: 100%;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            border-color: #000080 #ccc #ccc #000080;
+        }
+
+        input[readonly] {
+            background: #e0e0e0;
+            color: #404040;
         }
 
         button {
-            background: linear-gradient(135deg, #6d4aff 0%, #5a3dd6 100%);
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-size: 1em;
+            font-family: 'MS Sans Serif', Tahoma, sans-serif;
+            font-size: 11px;
+            padding: 6px 16px;
+            border: 2px solid;
+            border-color: #ffffff #404040 #404040 #ffffff;
+            background: #c0c0c0;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-right: 10px;
-            margin-bottom: 10px;
+            margin-right: 5px;
+            margin-bottom: 5px;
         }
 
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(109, 76, 255, 0.4);
+            background: #d0d0d0;
         }
 
-        button.secondary {
-            background: linear-gradient(135deg, #444 0%, #333 100%);
+        button:active {
+            border-color: #404040 #ffffff #ffffff #404040;
         }
 
-        .result-area {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            padding: 15px;
-            min-height: 60px;
+        button.primary {
+            border-color: #000 #ffffff #ffffff #000;
+            font-weight: bold;
+        }
+
+        button:disabled {
+            color: #808080;
+            cursor: not-allowed;
+        }
+
+        .result-box {
+            border: 2px inset;
+            border-color: #404040 #dfdfdf #dfdfdf #404040;
+            background: white;
+            padding: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            min-height: 24px;
+            margin-top: 8px;
             word-break: break-all;
-            font-family: 'Courier New', monospace;
-            font-size: 1.2em;
-            color: #4ade80;
         }
 
-        .result-area.error {
-            color: #f87171;
+        .result-valid {
+            color: #008000;
+            font-weight: bold;
+        }
+
+        .result-invalid {
+            color: #cc0000;
+            font-weight: bold;
         }
 
         .key-list {
-            max-height: 300px;
+            max-height: 200px;
             overflow-y: auto;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            padding: 15px;
+            border: 2px inset;
+            border-color: #404040 #dfdfdf #dfdfdf #404040;
+            background: white;
+            padding: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
         }
 
         .key-item {
-            padding: 8px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            font-family: 'Courier New', monospace;
-            color: #4ade80;
+            padding: 3px 0;
+            border-bottom: 1px solid #e0e0e0;
         }
 
         .key-item:last-child {
             border-bottom: none;
         }
 
-        .info-box {
-            background: rgba(109, 76, 255, 0.1);
-            border-left: 4px solid #6d4aff;
-            padding: 15px;
-            margin: 15px 0;
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .stat-box {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 1.8em;
-            color: #6d4aff;
-            font-weight: bold;
-        }
-
-        .stat-label {
-            color: #888;
-            font-size: 0.9em;
+        .info-text {
+            color: #404040;
+            font-size: 10px;
             margin-top: 5px;
         }
 
         footer {
             text-align: center;
-            margin-top: 30px;
-            color: #666;
-            font-size: 0.9em;
-        }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8em; }
-            button { width: 100%; margin-right: 0; }
+            color: #f0f0f0;
+            font-size: 10px;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🔑 MOD7 Key Generator</h1>
-            <p class="subtitle">Generate and validate Microsoft-style product keys using the MOD7 algorithm</p>
-        </header>
-
-        <!-- Single Key Generation -->
-        <div class="card">
-            <h2>⚡ Generate Single Key</h2>
-            <div class="info-box">
-                <strong>About MOD7:</strong> The digit sum of the key's second segment must be divisible by 7. 
-                Site numbers cannot be repeated digits (333, 444, etc.). For maximum compatibility, the last digit should not be 0 or ≥8.
+    <div class="window">
+        <div class="title-bar">
+            <span>MOD7 Key Generator - Windows 98 Edition</span>
+            <div class="title-buttons">
+                <span>_</span><span>[]</span><span>X</span>
             </div>
-            
-            <div class="form-group">
-                <label for="keyType">Key Type:</label>
+        </div>
+        <div class="content">
+            <h1>MOD7 Key Generator v2.0</h1>
+
+            <!-- Single Key Generation -->
+            <div class="section">
+                <div class="section-title">Generate Single Key</div>
+                <label>Key Type:</label>
                 <select id="keyType">
-                    <option value="cd">CD Key (3-7 digits)</option>
-                    <option value="oem">OEM Key (Date + OEM + 7 digits)</option>
-                    <option value="office97">Office 97 (4-7 digits)</option>
+                    <option value="retail">CD/Retail Key (XXX-XXXXXXX)</option>
+                    <option value="oem">OEM Key (ABCDE-OEM-XXXXXXXX-XXXXX)</option>
+                    <option value="office97">Office 97/NT4 Key (XXXX-XXXXXXX)</option>
                 </select>
+                <div style="margin-top: 8px;">
+                    <button class="primary" onclick="generateSingleKey()">Generate Key</button>
+                    <button onclick="copyToClipboard('singleResult')">Copy</button>
+                </div>
+                <div style="margin-top: 10px;">
+                    <label>Result:</label>
+                    <div id="singleResult" class="result-box">Click "Generate Key" to create a valid MOD7 key</div>
+                </div>
             </div>
 
-            <button onclick="generateSingleKey()">Generate Key</button>
-            <button class="secondary" onclick="copyToClipboard('singleResult')">Copy</button>
-            
-            <div style="margin-top: 15px;">
-                <label>Generated Key:</label>
-                <div id="singleResult" class="result-area">Click "Generate Key" to create a valid MOD7 key</div>
+            <!-- Key Validation -->
+            <div class="section">
+                <div class="section-title">Validate Key</div>
+                <label>Enter Key to Validate:</label>
+                <input type="text" id="validationInput" placeholder="e.g., 123-4567890 or 00195-OEM-0000007-00000" />
+                <div style="margin-top: 8px;">
+                    <button class="primary" onclick="validateKey()">Validate</button>
+                    <button onclick="clearValidation()">Clear</button>
+                </div>
+                <div style="margin-top: 10px;">
+                    <label>Validation Result:</label>
+                    <div id="validationResult" class="result-box">Enter a key above to validate it</div>
+                </div>
             </div>
-        </div>
 
-        <!-- Key Validation -->
-        <div class="card">
-            <h2>✔️ Validate Key</h2>
-            <div class="form-group">
-                <label for="validationInput">Enter Key to Validate:</label>
-                <input type="text" id="validationInput" placeholder="e.g., 123-4567890" />
-            </div>
-            
-            <button onclick="validateKey()">Validate</button>
-            <button class="secondary" onclick="clearValidation()">Clear</button>
-            
-            <div style="margin-top: 15px;">
-                <label>Validation Result:</label>
-                <div id="validationResult" class="result-area">Enter a key above to validate it</div>
-            </div>
-        </div>
-
-        <!-- Batch Generation -->
-        <div class="card">
-            <h2>📦 Generate Batch Keys</h2>
-            <div class="form-group">
-                <label for="batchCount">Number of Keys:</label>
+            <!-- Batch Generation -->
+            <div class="section">
+                <div class="section-title">Generate Batch Keys</div>
+                <label>Number of Keys (1-1000):</label>
                 <input type="number" id="batchCount" min="1" max="1000" value="10" />
-            </div>
-            
-            <div class="form-group">
-                <label for="batchKeyType">Key Type:</label>
+                <label style="margin-top: 8px;">Key Type:</label>
                 <select id="batchKeyType">
-                    <option value="cd">CD Key (3-7 digits)</option>
+                    <option value="retail">CD/Retail Key</option>
                     <option value="oem">OEM Key</option>
-                    <option value="office97">Office 97 Key</option>
+                    <option value="office97">Office 97/NT4 Key</option>
                 </select>
-            </div>
-
-            <button onclick="generateBatchKeys()">Generate All</button>
-            <button class="secondary" onclick="copyAllKeys()">Copy All</button>
-            <button class="secondary" onclick="exportToFile()">Export to File</button>
-            
-            <div id="batchStats" class="stats" style="display: none;">
-                <div class="stat-box">
-                    <div class="stat-value" id="totalKeys">0</div>
-                    <div class="stat-label">Total Generated</div>
+                <div style="margin-top: 8px;">
+                    <button class="primary" onclick="generateBatchKeys()">Generate All</button>
+                    <button onclick="copyAllKeys()">Copy All</button>
+                    <button onclick="exportToFile()">Export TXT</button>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-value" id="validKeys">0</div>
-                    <div class="stat-label">Valid (100%)</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value" id="genTime">0s</div>
-                    <div class="stat-label">Generation Time</div>
+                <div style="margin-top: 10px;">
+                    <label>Generated Keys:</label>
+                    <div id="batchResult" class="key-list"></div>
                 </div>
             </div>
 
-            <div style="margin-top: 15px;">
-                <label>Generated Keys:</label>
-                <div id="batchResult" class="key-list"></div>
+            <!-- Info Section -->
+            <div class="section">
+                <div class="section-title">About MOD7 Algorithm</div>
+                <p class="info-text">
+                    The MOD7 algorithm requires the digit sum of certain key segments to be divisible by 7.<br>
+                    This tool generates keys following Microsoft's 1990s key formats (Windows 95/98, NT 4, Office 97).<br>
+                    Keys are for educational purposes only and may not activate modern software.
+                </p>
+                <p class="info-text" style="margin-top: 8px;">
+                    <a href="https://gurney.dev/posts/mod7/" target="_blank" style="color: #000080;">Original Tutorial by Daniel Gurney</a>
+                </p>
             </div>
+
+            <footer>
+                MOD7 Key Generator v2.0 | Educational Purpose Only | Based on Windows 98 Era Algorithms
+            </footer>
         </div>
-
-        <footer>
-            <p>MOD7 Key Generator | Educational Purposes Only | Based on Daniel Gurney's Tutorial</p>
-            <p style="margin-top: 5px;"><a href="https://gurney.dev/posts/mod7/" target="_blank" style="color: #6d4aff;">View Original Tutorial</a></p>
-        </footer>
     </div>
 
     <script>
-        // MOD7 Algorithm Implementation
-        
-        /**
-         * Calculate the digit sum of a number/string
-         */
-        function digitSum(str) {
-            return str.split('').reduce((sum, char) => sum + parseInt(char, 10), 0);
+        // ========== MOD7 ALGORITHM IMPLEMENTATION ==========
+
+        // Sum of all digits in a number
+        function sumOfDigits(num) {
+            return num.toString().split('').reduce((sum, d) => sum + parseInt(d, 10), 0);
         }
 
-        /**
-         * Generate a random number with specified digit count
-         */
-        function randomDigits(count) {
-            let result = '';
-            for (let i = 0; i < count; i++) {
-                result += Math.floor(Math.random() * 10);
-            }
-            return result;
+        // Pad string on left to reach total length
+        function padLeft(str, length, padChar = '0') {
+            return str.toString().padStart(length, padChar);
         }
 
-        /**
-         * Get a valid site number (excludes 333, 444, 555, 666, 777, 888, 999)
-         */
-        function getValidSiteNumber() {
-            const invalid = ['333', '444', '555', '666', '777', '888', '999'];
-            let site;
+        // Generate random integer between min and max (inclusive)
+        function randomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // ========== RETAIL/CD KEY GENERATOR ==========
+        // Format: XXX-XXXXXXX
+        function generateRetailKey() {
+            // Generate valid site number (not 333, 444, ..., 999)
+            const badPatterns = ['333', '444', '555', '666', '777', '888', '999'];
+            let x1;
             do {
-                site = randomDigits(3);
-            } while (invalid.includes(site));
-            return site;
-        }
-
-        /**
-         * Generate a MOD7 compliant segment (digit sum divisible by 7)
-         */
-        function generateMod7Segment(length) {
-            // Generate first (length - 1) digits randomly
-            let segment = randomDigits(length - 1);
+                x1 = randomInt(0, 999);
+            } while (badPatterns.includes(padLeft(x1, 3)));
             
-            // Calculate what the last digit needs to be to make sum divisible by 7
-            const currentSum = digitSum(segment);
-            const remainder = currentSum % 7;
-            const checkDigit = (7 - remainder) % 7;
+            const x1str = padLeft(x1, 3);
             
-            segment += checkDigit;
-            return segment;
+            // Generate 7-digit MOD7 compliant segment
+            let x2;
+            do {
+                x2 = randomInt(0, 9999999);
+            } while (sumOfDigits(x2) % 7 !== 0 || ['0', '8', '9'].includes((x2 % 10).toString()));
+            
+            const x2str = padLeft(x2, 7);
+            
+            return `${x1str}-${x2str}`;
         }
 
-        /**
-         * Generate MOD7 segment with last digit restriction (for NT4+ compatibility)
-         * Last digit cannot be 0 or >= 8
-         */
-        function generateMod7SegmentRestricted(length) {
-            // Try up to 100 times to find a valid segment
-            for (let attempt = 0; attempt < 100; attempt++) {
-                let segment = randomDigits(length - 1);
-                const currentSum = digitSum(segment);
-                const remainder = currentSum % 7;
-                const checkDigit = (7 - remainder) % 7;
-                
-                // Check if last digit meets NT4+ requirements
-                if (checkDigit !== 0 && checkDigit < 8) {
-                    return segment + checkDigit;
-                }
-            }
-            // Fallback (should rarely happen)
-            return generateMod7Segment(length);
-        }
-
-        /**
-         * Generate CD Key (3-7 format)
-         */
-        function generateCDKey(restrictLastDigit = true) {
-            const siteNumber = getValidSiteNumber();
-            const mod7Segment = restrictLastDigit ? 
-                generateMod7SegmentRestricted(7) : 
-                generateMod7Segment(7);
-            return `${siteNumber}-${mod7Segment}`;
-        }
-
-        /**
-         * Generate OEM Key (complex format with date)
-         */
+        // ========== OEM KEY GENERATOR ==========
+        // Format: ABCDE-OEM-0XXXXXX-XXXXX
         function generateOEMKey() {
-            // Segment 1: Day of year (001-366) + year (95-02 for compatibility)
-            const dayOfYear = String(Math.floor(Math.random() * 366) + 1).padStart(3, '0');
-            const year = String(Math.floor(Math.random() * 8) + 95); // 95-02
+            // Day of year (1-366)
+            const doy = randomInt(1, 366);
+            const doystr = padLeft(doy, 3);
             
-            // Segment 2: OEM
-            const oem = 'OEM';
+            // Year (95-03, cap at 02 for Windows 95 compatibility)
+            const years = ['95', '96', '97', '98', '99', '00', '01', '02', '03'];
+            const yearstr = years[randomInt(0, years.length - 1)];
             
-            // Segment 3: Manufacturer code (5 digits)
-            const manufacturer = randomDigits(5);
+            // Third segment: starts with 0, digit sum divisible by 7, last digit not 0, 8, or 9
+            let x2;
+            do {
+                x2 = randomInt(0, 999999);
+            } while (sumOfDigits(x2) % 7 !== 0 || ['0', '8', '9'].includes((x2 % 10).toString()));
             
-            // Segment 4: MOD7 compliant 7-digit segment with restricted last digit
-            const mod7Segment = generateMod7SegmentRestricted(7);
+            const x2str = '0' + padLeft(x2, 6);
             
-            return `${dayOfYear}${year}-${oem}-${manufacturer}-${mod7Segment}`;
+            // Fourth segment: random 5 digits
+            const x3 = randomInt(0, 99999);
+            const x3str = padLeft(x3, 5);
+            
+            return `${doystr}${yearstr}-OEM-${x2str}-${x3str}`;
         }
 
-        /**
-         * Generate Office 97 Key (4-7 format)
-         * First segment: last digit must be 3rd digit + 1 or 2 (overflow to 0/1)
-         */
+        // ========== OFFICE 97/NT4 KEY GENERATOR ==========
+        // Format: XXXX-XXXXXXX
         function generateOffice97Key() {
-            // Generate first 3 digits of first segment
-            let firstThree = randomDigits(3);
+            // First segment: 4 digits, last digit = 3rd digit + 1 or +2 (with overflow to 0/1)
+            const firstThree = padLeft(randomInt(0, 991), 4).substring(0, 3);
             const thirdDigit = parseInt(firstThree[2], 10);
             const offset = Math.random() < 0.5 ? 1 : 2;
             let fourthDigit = thirdDigit + offset;
             
-            // Handle overflow
+            // Handle overflow: past 9 becomes 0 or 1
             if (fourthDigit > 9) {
-                fourthDigit = fourthDigit - 9; // Overflow to 0 or 1
+                fourthDigit -= 10;
             }
             
-            const firstSegment = firstThree + fourthDigit;
+            const firstSegment = firstThree + fourthDigit.toString();
             
             // Second segment: 7 digits, digit sum divisible by 7
-            const secondSegment = generateMod7Segment(7);
+            let secondSegment;
+            do {
+                secondSegment = randomInt(0, 9999999);
+            } while (sumOfDigits(secondSegment) % 7 !== 0);
             
-            return `${firstSegment}-${secondSegment}`;
+            const secondSegmentStr = padLeft(secondSegment, 7);
+            
+            return `${firstSegment}-${secondSegmentStr}`;
         }
 
-        /**
-         * Main key generation function
-         */
+        // ========== MAIN GENERATION FUNCTION ==========
         function generateKey(keyType) {
             switch (keyType) {
-                case 'cd':
-                    return generateCDKey(true);
+                case 'retail':
+                    return generateRetailKey();
                 case 'oem':
                     return generateOEMKey();
                 case 'office97':
                     return generateOffice97Key();
                 default:
-                    return generateCDKey(true);
+                    return generateRetailKey();
             }
         }
 
-        /**
-         * Validate a key
-         */
-        function validateKeyInput(keyStr, keyType) {
-            const errors = [];
-            const cleanKey = keyStr.replace(/[^0-9A-Za-z\-]/gi, '');
+        // ========== VALIDATION FUNCTIONS ==========
+
+        // MOD7 check helper
+        function mod7Check(keySegment) {
+            const sum = sumOfDigits(parseInt(keySegment, 10));
+            return sum % 7 === 0;
+        }
+
+        // Validate Retail Key
+        function validateRetailKey(key) {
+            const segments = key.split('-');
+            if (segments.length !== 2) return { valid: false, reason: 'Must have exactly one dash separator' };
+            
+            const [first, second] = segments;
+            if (first.length !== 3 || !/^\d{3}$/.test(first)) {
+                return { valid: false, reason: 'First segment must be 3 digits' };
+            }
+            
+            if (['333', '444', '555', '666', '777', '888', '999'].includes(first)) {
+                return { valid: false, reason: 'Invalid site number (repeated digits)' };
+            }
+            
+            if (second.length !== 7 || !/^\d{7}$/.test(second)) {
+                return { valid: false, reason: 'Second segment must be 7 digits' };
+            }
+            
+            if (!mod7Check(second)) {
+                return { valid: false, reason: `Digit sum (${sumOfDigits(parseInt(second, 10))}) not divisible by 7` };
+            }
+            
+            const lastDigit = second[6];
+            if (['0', '8', '9'].includes(lastDigit)) {
+                return { valid: false, reason: `Last digit (${lastDigit}) cannot be 0, 8, or 9` };
+            }
+            
+            return { valid: true, reason: 'Valid CD/Retail Key!' };
+        }
+
+        // Validate OEM Key
+        function validateOEMKey(key) {
+            const segments = key.split('-');
+            if (segments.length !== 4) return { valid: false, reason: 'OEM key must have 4 segments separated by dashes' };
+            
+            const [dateYear, oemTag, mod7Seg, random5] = segments;
+            
+            // Check date-year segment (5 digits)
+            if (dateYear.length !== 5 || !/^\d{5}$/.test(dateYear)) {
+                return { valid: false, reason: 'First segment must be 5 digits (DDDYY)' };
+            }
+            
+            const dayOfYear = parseInt(dateYear.substring(0, 3), 10);
+            const year = parseInt(dateYear.substring(3, 5), 10);
+            
+            if (dayOfYear < 1 || dayOfYear > 366) {
+                return { valid: false, reason: `Day of year (${dayOfYear}) must be 1-366` };
+            }
+            
+            if (!((year >= 95 && year <= 99) || (year >= 0 && year <= 3))) {
+                return { valid: false, reason: `Year (${year}) must be 95-03` };
+            }
+            
+            // Check OEM tag
+            if (oemTag !== 'OEM') {
+                return { valid: false, reason: 'Second segment must be "OEM"' };
+            }
+            
+            // Check MOD7 segment (starts with 0)
+            if (mod7Seg.length !== 7 || !/^\d{7}$/.test(mod7Seg)) {
+                return { valid: false, reason: 'Third segment must be 7 digits' };
+            }
+            
+            if (mod7Seg[0] !== '0') {
+                return { valid: false, reason: 'Third segment must start with 0' };
+            }
+            
+            if (!mod7Check(mod7Seg)) {
+                return { valid: false, reason: `Digit sum of third segment not divisible by 7` };
+            }
+            
+            const lastDigit = mod7Seg[6];
+            if (['0', '8', '9'].includes(lastDigit)) {
+                return { valid: false, reason: `Last digit (${lastDigit}) cannot be 0, 8, or 9` };
+            }
+            
+            // Check random 5-digit segment
+            if (random5.length !== 5 || !/^\d{5}$/.test(random5)) {
+                return { valid: false, reason: 'Fourth segment must be 5 digits' };
+            }
+            
+            return { valid: true, reason: 'Valid OEM Key!' };
+        }
+
+        // Validate Office 97/NT4 Key
+        function validateOffice97Key(key) {
+            const segments = key.split('-');
+            if (segments.length !== 2) return { valid: false, reason: 'Must have exactly one dash separator' };
+            
+            const [first, second] = segments;
+            if (first.length !== 4 || !/^\d{4}$/.test(first)) {
+                return { valid: false, reason: 'First segment must be 4 digits' };
+            }
+            
+            if (second.length !== 7 || !/^\d{7}$/.test(second)) {
+                return { valid: false, reason: 'Second segment must be 7 digits' };
+            }
+            
+            // Check first segment rule: 4th digit = 3rd digit + 1 or +2 (overflow to 0/1)
+            const thirdDigit = parseInt(first[2], 10);
+            const fourthDigit = parseInt(first[3], 10);
+            const expected1 = (thirdDigit + 1) % 10;
+            const expected2 = (thirdDigit + 2) % 10;
+            
+            if (fourthDigit !== expected1 && fourthDigit !== expected2) {
+                return { valid: false, reason: `4th digit must be 3rd digit +1 or +2 (got ${fourthDigit}, expected ${expected1} or ${expected2})` };
+            }
+            
+            // Check MOD7 on second segment
+            if (!mod7Check(second)) {
+                return { valid: false, reason: `Digit sum of second segment not divisible by 7` };
+            }
+            
+            return { valid: true, reason: 'Valid Office 97/NT4 Key!' };
+        }
+
+        // Master validation function
+        function validateKeyInput(keyStr) {
+            const cleanKey = keyStr.trim().toUpperCase();
+            if (!cleanKey) return { valid: false, reason: 'Please enter a key to validate' };
+            
+            // Try to determine key type based on format
             const segments = cleanKey.split('-');
-
-            // Common validation: Check MOD7 segment exists
-            if (segments.length < 2) {
-                return { valid: false, errors: ['Key must contain at least one dash separator'], formatted: cleanKey };
+            
+            if (segments.length === 4 && segments[1] === 'OEM') {
+                return validateOEMKey(cleanKey);
+            } else if (segments.length === 2) {
+                // Could be retail or office97 - check lengths
+                if (segments[0].length === 3 && segments[1].length === 7) {
+                    return validateRetailKey(cleanKey);
+                } else if (segments[0].length === 4 && segments[1].length === 7) {
+                    return validateOffice97Key(cleanKey);
+                } else {
+                    return { valid: false, reason: 'Unknown key format. Expected XXX-XXXXXXX, XXXX-XXXXXXX, or DDDYY-OEM-0XXXXXX-XXXXX' };
+                }
+            } else {
+                return { valid: false, reason: 'Unknown key format' };
             }
-
-            // Extract the main numeric segment (usually second segment for CD keys)
-            const mainSegment = segments[segments.length - 1];
-
-            // Validate the segment is purely numeric
-            if (!/^\d+$/.test(mainSegment)) {
-                return { valid: false, errors: ['Final segment must contain only digits'], formatted: cleanKey };
-            }
-
-            // Calculate digit sum
-            const sum = digitSum(mainSegment);
-            const isValidMod7 = sum % 7 === 0;
-
-            if (!isValidMod7) {
-                return { 
-                    valid: false, 
-                    errors: [`Digit sum (${sum}) is not divisible by 7`, `Last digit (${mainSegment.slice(-1)}) fails MOD7 check`], 
-                    formatted: cleanKey,
-                    detail: { digitSum: sum, lastDigit: mainSegment.slice(-1) }
-                };
-            }
-
-            // Additional type-specific validation
-            switch (keyType) {
-                case 'cd':
-                    if (segments.length === 2 && segments[0].length === 3) {
-                        const siteNum = segments[0];
-                        if (['333', '444', '555', '666', '777', '888', '999'].includes(siteNum)) {
-                            errors.push(`Invalid site number: ${siteNum} (repeated digits)`);
-                        }
-                    }
-                    break;
-            }
-
-            return { 
-                valid: errors.length === 0, 
-                errors, 
-                formatted: cleanKey,
-                detail: { digitSum: sum }
-            };
         }
 
-        // UI Functions
+        // ========== UI FUNCTIONS ==========
+
+        let generatedKeys = [];
 
         function generateSingleKey() {
             const keyType = document.getElementById('keyType').value;
             const key = generateKey(keyType);
             document.getElementById('singleResult').textContent = key;
-            document.getElementById('singleResult').classList.remove('error');
         }
 
         function copyToClipboard(elementId) {
             const text = document.getElementById(elementId).textContent;
             navigator.clipboard.writeText(text).then(() => {
                 alert('Copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('Copied to clipboard!');
             });
         }
 
         function validateKey() {
             const keyInput = document.getElementById('validationInput').value.trim();
-            const keyType = document.getElementById('keyType').value;
-            const result = validateKeyInput(keyInput, keyType);
+            const result = validateKeyInput(keyInput);
             const resultEl = document.getElementById('validationResult');
             
             if (result.valid) {
-                resultEl.className = 'result-area';
-                resultEl.innerHTML = `✅ <strong>Valid Key!</strong><br>Format: ${result.formatted}<br>Digit Sum: ${result.detail.digitSum} (divisible by 7)`;
+                resultEl.className = 'result-box result-valid';
+                resultEl.innerHTML = `✓ ${result.reason}<br><strong>${keyInput}</strong>`;
             } else {
-                resultEl.className = 'result-area error';
-                resultEl.innerHTML = `❌ Invalid Key<br>${result.errors.map(e => `• ${e}`).join('<br>')}`;
+                resultEl.className = 'result-box result-invalid';
+                resultEl.textContent = `✗ ${result.reason}`;
             }
         }
 
         function clearValidation() {
             document.getElementById('validationInput').value = '';
+            document.getElementById('validationResult').className = 'result-box';
             document.getElementById('validationResult').textContent = 'Enter a key above to validate it';
         }
-
-        let generatedKeys = [];
 
         function generateBatchKeys() {
             const count = parseInt(document.getElementById('batchCount').value) || 10;
@@ -529,7 +598,7 @@
             const listEl = document.getElementById('batchResult');
             listEl.innerHTML = '';
             
-            for (let i = 0; i < count; i++) {
+            for (let i = 0; i < Math.min(count, 1000); i++) {
                 const key = generateKey(keyType);
                 generatedKeys.push(key);
                 
@@ -541,12 +610,7 @@
             
             const endTime = performance.now();
             const duration = ((endTime - startTime) / 1000).toFixed(3);
-            
-            // Show stats
-            document.getElementById('batchStats').style.display = 'grid';
-            document.getElementById('totalKeys').textContent = generatedKeys.length;
-            document.getElementById('validKeys').textContent = '100%';
-            document.getElementById('genTime').textContent = `${duration}s`;
+            listEl.innerHTML += `<div class="key-item"><strong>Generated ${Math.min(count, 1000)} keys in ${duration}s</strong></div>`;
         }
 
         function copyAllKeys() {
@@ -567,7 +631,8 @@
             }
             
             const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-            const content = `MOD7 Generated Keys\nGenerated: ${new Date().toLocaleString()}\nKey Type: ${document.getElementById('batchKeyType').selectedOptions[0].text}\nTotal: ${generatedKeys.length}\n${'='.repeat(50)}\n\n${generatedKeys.join('\n')}`;
+            const keyTypeLabel = document.getElementById('batchKeyType').selectedOptions[0].text;
+            const content = `MOD7 Generated Keys\nGenerated: ${new Date().toLocaleString()}\nKey Type: ${keyTypeLabel}\nTotal: ${generatedKeys.length}\n${'='.repeat(50)}\n\n${generatedKeys.join('\n')}`;
             
             const blob = new Blob([content], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
@@ -579,6 +644,13 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
+
+        // Keyboard shortcut for validation (Enter key)
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('validationInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') validateKey();
+            });
+        });
     </script>
 </body>
 </html>
