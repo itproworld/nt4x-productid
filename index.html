@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Mod7 Setup & Validator</title>
+    <style>
+        /* Classic Windows 95 Theme Styles */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #008080; /* Classic Teal */
+            font-family: "MS Sans Serif", "Segoe UI", Tahoma, Arial, sans-serif;
+            font-size: 12px;
+            color: #000000;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .window {
+            background-color: #c0c0c0;
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid #808080;
+            border-bottom: 2px solid #808080;
+            box-shadow: 1px 1px 0px 0px #000000;
+            padding: 3px;
+            width: 480px;
+            position: relative;
+        }
+        .title-bar {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            color: #ffffff;
+            padding: 3px 6px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title-bar-text {
+            letter-spacing: 0.5px;
+        }
+        .window-body {
+            padding: 15px;
+        }
+        fieldset {
+            border-top: 2px solid #808080;
+            border-left: 2px solid #808080;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+        legend {
+            background-color: #c0c0c0;
+            padding: 0 5px;
+        }
+        .form-group {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .form-group label {
+            width: 120px;
+        }
+        select, input[type="text"], input[type="number"] {
+            font-family: inherit;
+            font-size: 12px;
+            padding: 3px;
+            border-top: 2px solid #808080;
+            border-left: 2px solid #808080;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+            background-color: #ffffff;
+            outline: none;
+        }
+        select, input[type="number"] {
+            width: 100%;
+        }
+        input[type="text"] {
+            width: 100%;
+        }
+        input[type="text"].mono {
+            font-family: "Courier New", Courier, monospace;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .button-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        button {
+            font-family: inherit;
+            font-size: 12px;
+            background-color: #c0c0c0;
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid #808080;
+            border-bottom: 2px solid #808080;
+            box-shadow: 1px 1px 0px 0px #000000;
+            padding: 4px 15px;
+            min-width: 75px;
+            cursor: pointer;
+            outline: none;
+        }
+        button:active {
+            border-top: 2px solid #808080;
+            border-left: 2px solid #808080;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+            box-shadow: none;
+            padding: 5px 14px 3px 16px;
+        }
+        .status-box {
+            border-top: 2px solid #808080;
+            border-left: 2px solid #808080;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+            background-color: #ffffff;
+            padding: 8px;
+            min-height: 40px;
+            margin-top: 10px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 12px;
+        }
+        .valid {
+            color: #008000;
+            font-weight: bold;
+        }
+        .invalid {
+            color: #ff0000;
+            font-weight: bold;
+        }
+        .info-text {
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        /* Windows 95 Classic Error Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: transparent;
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+        .error-dialog {
+            width: 350px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+        .error-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+        }
+        .error-icon {
+            width: 32px;
+            height: 32px;
+            background-color: #ff0000;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            box-shadow: inset -1px -1px 2px #000, inset 1px 1px 2px #fff;
+        }
+        .error-msg {
+            font-size: 12px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Application Window -->
+    <div class="window">
+        <div class="title-bar">
+            <span class="title-bar-text">Microsoft Setup - CD Key Utility</span>
+        </div>
+        <div class="window-body">
+            <p class="info-text">Select your target platform below to generate valid deployment serial sequences, or type an existing setup key to validate it in real-time.</p>
+            
+            <fieldset>
+                <legend>Configuration Options</legend>
+                <div class="form-group">
+                    <label for="keyType">Key Type:</label>
+                    <select id="keyType">
+                        <option value="standard">Standard CD Key (10-Digit)</option>
+                        <option value="office">11-Digit CD Key (Office 97)</option>
+                        <option value="oem">OEM Key (24-Digit)</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Single Key Input / Output</legend>
+                <div class="form-group">
+                    <label for="keyInput">Serial Number:</label>
+                    <input type="text" id="keyInput" class="mono" placeholder="Click Generate or type here...">
+                </div>
+                <div class="button-row" style="margin-top: 5px;">
+                    <button id="generateBtn">Generate</button>
+                    <button id="validateBtn">Validate</button>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Batch Generation Export</legend>
+                <div class="form-group">
+                    <label for="batchCount">Amount:</label>
+                    <input type="number" id="batchCount" value="50" min="1" max="500" style="width: 80px;">
+                    <button id="batchBtn" style="width: 100%;">Generate & Download .TXT</button>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Real-Time Verification Engine</legend>
+                <div id="statusDisplay" class="status-box">
+                    Ready to evaluate installation sequence tokens.
+                </div>
+            </fieldset>
+
+            <div class="button-row">
+                <button id="copyBtn">Copy Key</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Windows 95 Classic Setup Error Dialog Box -->
+    <div id="errorModal" class="modal-overlay">
+        <div class="window error-dialog">
+            <div class="title-bar">
+                <span class="title-bar-text">Setup Error</span>
+            </div>
+            <div class="window-body">
+                <div class="error-content">
+                    <div class="error-icon">X</div>
+                    <div id="errorModalMsg" class="error-msg">The configuration string entered is invalid.</div>
+                </div>
+                <div class="button-row">
+                    <button id="closeErrorBtn">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const pad = (num, size) => {
+            let s = num + "";
+            while (s.length < size) s = "0" + s;
+            return s;
+        };
+
+        const randRange = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+        // Generates a valid 7-digit mod7 sequence following universal check rules
+        function generateMod7Segment(forceFirstZero = false) {
+            while (true) {
+                let digits = [];
+                digits = forceFirstZero ? [0] : [randRange(0, 9)];
+                for (let i = 1; i < 6; i++) {
+                    digits[i] = randRange(0, 9);
+                }
+                digits[6] = randRange(1, 7); // Universal check digit rule: no 0, no >= 8
+                
+                const sum = digits.reduce((a, b) => a + b, 0);
+                if (sum % 7 === 0) {
+                    return digits.join('');
+                }
+            }
+        }
+
+        function generateStandardKey() {
+            const banned =;
+            let firstSeg;
+            do {
+                firstSeg = randRange(0, 998);
+            } while (banned.includes(firstSeg));
+            
+            return `${pad(firstSeg, 3)}-${generateMod7Segment(false)}`;
+        }
+
+Usa el código con precaución.
+function generateOfficeKey() {
+const d1 = randRange(0, 9);
+const d2 = randRange(0, 9);
+const d3 = randRange(0, 9);
+const offset = randRange(1, 2);
+const d4 = (d3 + offset) % 10;
+return ${d1}${d2}${d3}${d4}-${generateMod7Segment(false)};
+}
+function generateOemKey() {
+const day = pad(randRange(1, 366), 3);
+const year = pad(randRange(95, 102) % 100, 2);
+const fourthSeg = pad(randRange(0, 99999), 5);
+return ${day}${year}-OEM-${generateMod7Segment(true)}-${fourthSeg};
+}
+function checkMod7String(str, expectFirstZero = false, strictCheckDigit = true) {
+if (str.length !== 7 || !/^\d+$/.test(str)) {
+return { valid: false, reason: "Mod7 segment must be exactly 7 numeric digits." };
+}
+const digits = str.split('').map(Number);
+if (expectFirstZero && digits[0] !== 0) {
+return { valid: false, reason: "OEM Mod7 segment must begin with a 0." };
+}
+if (strictCheckDigit && (digits[6] === 0 || digits[6] >= 8)) {
+return { valid: false, reason: "Last digit violates the check-digit rule (cannot be 0, 8, or 9)." };
+}
+const sum = digits.reduce((a, b) => a + b, 0);
+if (sum % 7 !== 0) {
+return { valid: false, reason: Digit sum (${sum}) is not divisible by 7 (Remainder: ${sum % 7}). };
+}
+return { valid: true };
+}
+function validateKey(key, type) {
+key = key.trim();
+if (!key) return { valid: false, reason: "Input field is empty." };
+if (type === 'standard') {
+const parts = key.split('-');
+if (parts.length !== 2) return { valid: false, reason: "Format must follow XXX-XXXXXXX template." };
+const first = parts[0];
+if (first.length !== 3 || !/^\d+$/.test(first)) return { valid: false, reason: "First segment must be exactly 3 digits." };
+const firstNum = parseInt(first, 10);
+const banned =;
+if (banned.includes(firstNum) || firstNum > 998) {
+return { valid: false, reason: Site number ${first} is blacklisted or out of bounds (000-998). };
+}
+return checkMod7String(parts[1], false, true);
+}
+else if (type === 'office') {
+const parts = key.split('-');
+if (parts.length !== 2) return { valid: false, reason: "Format must follow XXXX-XXXXXXX template." };
+const first = parts[0];
+if (first.length !== 4 || !/^\d+$/.test(first)) return { valid: false, reason: "First segment must be exactly 4 digits." };
+const d3 = parseInt(first[2], 10);
+const d4 = parseInt(first[3], 10);
+const validD4_1 = (d3 + 1) % 10;
+const validD4_2 = (d3 + 2) % 10;
+if (d4 !== validD4_1 && d4 !== validD4_2) {
+return { valid: false, reason: Digit 4 (${d4}) must equal Digit 3 (${d3}) + 1 or + 2. };
+}
+return checkMod7String(parts[1], false, false);
+}
+else if (type === 'oem') {
+const parts = key.split('-');
+if (parts.length !== 4) return { valid: false, reason: "Format must follow XXXXX-OEM-XXXXXXX-XXXXX template." };
+const first = parts[0];
+if (first.length !== 5 || !/^\d+$/.test(first)) return { valid: false, reason: "First segment must be 5 digits (Day/Year)." };
+const day = parseInt(first.substring(0, 3), 10);
+const year = parseInt(first.substring(3, 5), 10);
+if (day < 1 || day > 366) return { valid: false, reason: Day index (${day}) must fall within a 001 to 366 loop. };
+if (!((year >= 95 && year <= 99) || (year >= 0 && year <= 3))) {
+return { valid: false, reason: Year allocation marker (${first.substring(3, 5)}) sits outside the valid 95-03 window. };
+}
+if (parts[1].toUpperCase() !== 'OEM') return { valid: false, reason: "Second segment must be the literal 'OEM' string." };
+const thirdCheck = checkMod7String(parts[2], true, true);
+if (!thirdCheck.valid) return thirdCheck;
+if (parts[3].length !== 5 || !/^\d+$/.test(parts[3])) {
+return { valid: false, reason: "Fourth segment must be exactly 5 random numeric digits." };
+}
+return { valid: true };
+}
+return { valid: false, reason: "Unknown parsing engine criteria status." };
+}
+// DOM Hookups
+const keyType = document.getElementById('keyType');
+const keyInput = document.getElementById('keyInput');
+const generateBtn = document.getElementById('generateBtn');
+const validateBtn = document.getElementById('validateBtn');
+const statusDisplay = document.getElementById('statusDisplay');
+const copyBtn = document.getElementById('copyBtn');
+const batchBtn = document.getElementById('batchBtn');
+const batchCount = document.getElementById('batchCount');
+const errorModal = document.getElementById('errorModal');
+const errorModalMsg = document.getElementById('errorModalMsg');
+const closeErrorBtn = document.getElementById('closeErrorBtn');
+// Single key generation trigger
+generateBtn.addEventListener('click', () => {
+let key = "";
+if (keyType.value === 'standard') key = generateStandardKey();
+else if (keyType.value === 'office') key = generateOfficeKey();
+else if (keyType.value === 'oem') key = generateOemKey();
+keyInput.value = key;
+statusDisplay.innerHTML = <span class="valid">SUCCESS:</span> Locally authenticated sequence key generated.;
+});
+// Key verification checker
+function handleValidation() {
+const result = validateKey(keyInput.value, keyType.value);
+if (result.valid) {
+statusDisplay.innerHTML = <span class="valid">PASS:</span> This key matches all operational algorithm criteria parameters.;
+return true;
+} else {
+statusDisplay.innerHTML = <span class="invalid">FAIL:</span> ${result.reason};
+return result.reason;
+}
+}
+// Action button verification event showing dialog popups on structural failures
+validateBtn.addEventListener('click', () => {
+const validationResult = handleValidation();
+if (validationResult !== true) {
+errorModalMsg.textContent = validationResult || "The configuration string entered is invalid.";
+errorModal.style.display = "flex";
+}
+});
+// Continuous context monitoring as user types
+keyInput.addEventListener('input', handleValidation);
+// Hide warning pop-ups
+closeErrorBtn.addEventListener('click', () => {
+errorModal.style.display = "none";
+});
+// Clean copying sequence
+copyBtn.addEventListener('click', () => {
+if (!keyInput.value.trim()) return;
+navigator.clipboard.writeText(keyInput.value.trim());
+const oldStatus = statusDisplay.innerHTML;
+statusDisplay.textContent = "Serial value text string successfully moved into system clipboard.";
+setTimeout(() => { statusDisplay.innerHTML = oldStatus; }, 1500);
+});
+// Batch generation array processing sequence
+batchBtn.addEventListener('click', () => {
+const count = parseInt(batchCount.value, 10) || 50;
+const type = keyType.value;
+let keysArray = [];
+for (let i = 0; i < count; i++) {
+if (type === 'standard') keysArray.push(generateStandardKey());
+else if (type === 'office') keysArray.push(generateOfficeKey());
+else if (type === 'oem') keysArray.push(generateOemKey());
+}
+const textContent = keysArray.join('\r\n');
+const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
+const link = document.createElement('a');
+link.href = URL.createObjectURL(blob);
+link.download = microsoft_mod7_${type}_keys.txt;
+link.click();
+URL.revokeObjectURL(link.href);
+statusDisplay.innerHTML = <span class="valid">BATCH:</span> Exported ${count} keys to log file file output.;
+});
