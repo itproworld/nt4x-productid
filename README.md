@@ -78,6 +78,7 @@ Simply open [`index.html`](index.html) in any modern web browser. No installatio
 
 ### Local Development
 
+
 # Clone the repository
 git clone https://github.com/yourusername/mod7-key-generator.git
 
@@ -89,38 +90,50 @@ open index.html        # macOS
 start index.html       # Windows
 xdg-open index.html    # Linux
 
-Browser Support
-Chrome 60+
-Firefox 55+
-Safari 11+
-Edge 79+
-Opera 47+
+
+### Browser Support
+
+- Chrome 60+
+- Firefox 55+
+- Safari 11+
+- Edge 79+
+- Opera 47+
+
 Works on mobile browsers (iOS Safari, Chrome Mobile).
 
-Installation
-Deploy to GitHub Pages
-Fork this repository
-Go to Settings → Pages
-Select main branch as source
-Wait ~60 seconds for deployment
-Visit https://yourusername.github.io/mod7-key-generator/
-Deploy to Any Static Hosting
+## Installation
+
+### Deploy to GitHub Pages
+
+1. Fork this repository
+2. Go to **Settings** → **Pages**
+3. Select `main` branch as source
+4. Wait ~60 seconds for deployment
+5. Visit `https://yourusername.github.io/mod7-key-generator/`
+
+### Deploy to Any Static Hosting
+
 Since this is pure HTML/CSS/JavaScript, you can deploy anywhere:
 
-Netlify (drag-and-drop)
-Vercel
-Surge
-Firebase Hosting
-Any web server
+- Netlify (drag-and-drop)
+- Vercel
+- Surge
+- Firebase Hosting
+- Any web server
+
 No build process or configuration needed.
 
-Project Structure
+## Project Structure
+
+
 mod7-key-generator/
 ├── index.html          # Main application
 ├── README.md           # This file
 └── LICENSE             # MIT license
 
-Code Organization
+
+### Code Organization
+
 The JavaScript implements three core generators matching the tutorial specifications:
 
 // Core utilities
@@ -138,47 +151,66 @@ validateRetailKey(key)
 validateOEMKey(key)
 validateOffice97Key(key)
 
-Screenshots
-<div align="center"> <img src="assets/screenshot-main-window.png" alt="Main Window" width="600"/> </div>
-The main window showing all three functional sections: Generate, Validate, and Batch.
+## Screenshots
 
-<div align="center"> <img src="assets/screenshot-validation.png" alt="Validation" width="600"/> </div>
-Key validation with detailed feedback on what failed or succeeded.
+<div align="center">
+  <img src="assets/screenshot-main-window.png" alt="Main Window" width="600"/>
+</div>
 
-Credits
-Algorithm Reference: Daniel Gurney's MOD7 Tutorial
-Community Contributions: 86Box community members who identified bugs in the original algorithm documentation
-Visual Design: Windows 98 classic UI elements
-Contributing
+*The main window showing all three functional sections: Generate, Validate, and Batch.*
+
+<div align="center">
+  <img src="assets/screenshot-validation.png" alt="Validation" width="600"/>
+</div>
+
+*Key validation with detailed feedback on what failed or succeeded.*
+
+## Credits
+
+- **Algorithm Reference**: [Daniel Gurney's MOD7 Tutorial](https://gurney.dev/posts/mod7/)
+- **Community Contributions**: 86Box community members who identified bugs in the original algorithm documentation
+- **Visual Design**: Windows 98 classic UI elements
+
+## Contributing
+
 Contributions are welcome! Feel free to submit issues or pull requests:
 
-Bug fixes
-New key type support
-UI improvements
-Accessibility enhancements
+- Bug fixes
+- New key type support
+- UI improvements
+- Accessibility enhancements
+
 Please ensure your code maintains the zero-dependency philosophy.
 
-Disclaimer
-This tool is for EDUCATIONAL PURPOSES ONLY.
+## Disclaimer
+
+> **This tool is for EDUCATIONAL PURPOSES ONLY.**
 
 Generated keys are mathematically valid according to the MOD7 checksum algorithm but:
 
-They are not licensed for software activation
-Using them to bypass paid software licenses may violate laws in your jurisdiction
-Modern software uses server-side activation that this tool cannot replicate
-This tool should not be used to facilitate copyright infringement
-The purpose of this project is to demonstrate:
+1. They are not licensed for software activation
+2. Using them to bypass paid software licenses may violate laws in your jurisdiction
+3. Modern software uses server-side activation that this tool cannot replicate
+4. This tool should not be used to facilitate copyright infringement
 
-Historical cryptography/checksum algorithms
-Web development techniques
-Retro computing preservation
-Related Projects
-86Box - PC emulator preserving the 1995-2004 era
-Windows 95 OSR2 - Internet Archive preservation
-Product Key Explorer - Legitimate key recovery tools
-License
-MIT License - See LICENSE for full text
+The purpose of this project is to demonstrate:
+- Historical cryptography/checksum algorithms
+- Web development techniques
+- Retro computing preservation
+
+## Related Projects
+
+- [86Box](https://www.86box.net/) - PC emulator preserving the 1995-2004 era
+- [Windows 95 OSR2](https://archive.org/details/windows-95-osr2) - Internet Archive preservation
+- [Product Key Explorer](https://www.magicaljellybean.com/keyfinder/) - Legitimate key recovery tools
+
+## License
+
+MIT License - See [`LICENSE`](LICENSE) for full text
 
 Free to use, modify, and distribute. Attribution appreciated but not required.
 
+---
+
 Built with ❤️ for the retro computing community
+
